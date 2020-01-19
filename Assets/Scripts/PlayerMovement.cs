@@ -25,10 +25,10 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
-        MovePlayer(ray);
+        MovePlayerRay(ray);
     }
 
-    public void MovePlayer(Ray ray)
+    public void MovePlayerRay(Ray ray)
     {
         RaycastHit hit;
         if (Input.GetMouseButton(0))
@@ -47,5 +47,24 @@ public class PlayerMovement : MonoBehaviour
             _isRunning = true;
         }
         _animator.SetBool(IsRunning,_isRunning);
+    }
+
+    public void MovePlayerDestination(Vector3 destination)
+    {
+        _navMeshAgent.destination = destination;
+        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+        {
+            _isRunning = false;
+        }
+        else
+        {
+            _isRunning = true;
+        }
+        _animator.SetBool(IsRunning,_isRunning);
+    }
+
+    public NavMeshAgent GetNavMeshAgent()
+    {
+        return _navMeshAgent;
     }
 }
