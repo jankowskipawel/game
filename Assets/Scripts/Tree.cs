@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tree : MonoBehaviour
 {
     private GameObject _player;
 
     private PlayerMovement _playerMovement;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +21,9 @@ public class Tree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+    
 
     private void OnMouseDown()
     {
@@ -29,7 +32,7 @@ public class Tree : MonoBehaviour
 
     private void CutTree()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 2f);
+        Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 2.1f);
         bool isNearObject = false;
         foreach (var collider in hitColliders)
         {
@@ -48,4 +51,6 @@ public class Tree : MonoBehaviour
             _playerMovement.MovePlayerDestination(transform.position);
         }
     }
+    
+    
 }

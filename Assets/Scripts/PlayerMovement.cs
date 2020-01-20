@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
+*/
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isRunning = false;
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
-
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayerRay(Ray ray)
     {
         RaycastHit hit;
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             if (Physics.Raycast(ray, out hit, 100))
             {
