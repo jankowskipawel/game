@@ -5,6 +5,7 @@ using NUnit.Framework.Constraints;
 */
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isRunning = false;
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private bool isBusy = false;
+    public Text x;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
         MovePlayerRay(ray);
+        var xd = PathLength();
+        x.text = $"Path length: {xd}";
     }
 
     public void MovePlayerRay(Ray ray)
@@ -53,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayerDestination(Vector3 destination)
     {
-        _navMeshAgent.destination = destination;
+        _navMeshAgent.SetDestination(destination);
         if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
         {
             _isRunning = false;
@@ -68,5 +73,49 @@ public class PlayerMovement : MonoBehaviour
     public NavMeshAgent GetNavMeshAgent()
     {
         return _navMeshAgent;
+    }
+
+    public bool GetIsBusy()
+    {
+        return isBusy;
+    }
+
+    public void SetIsBusy(bool x)
+    {
+        isBusy = x;
+    }
+    
+    public bool IsPathCompleted()
+    {
+        if (!_navMeshAgent.pathPending)
+        {
+            if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            {
+                if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
+    public float PathLength()
+    {
+        var path = _navMeshAgent.path;
+        if (path.corners.Length < 2)
+            return 0;
+        
+        Vector3 previousCorner = path.corners[0];
+        float lengthSoFar = 0.0F;
+        int i = 1;
+        while (i < path.corners.Length) {
+            Vector3 currentCorner = path.corners[i];
+            lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
+            previousCorner = currentCorner;
+            i++;
+        }
+        return lengthSoFar;
     }
 }
