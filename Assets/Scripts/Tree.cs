@@ -27,7 +27,7 @@ public class Tree : MonoBehaviour
     
     private void OnMouseDown()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 2.1f);
+        Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 3f);
         bool isNearObject = false;
         foreach (var collider in hitColliders)
         {
@@ -39,7 +39,7 @@ public class Tree : MonoBehaviour
 
         if (!isNearObject)
         {
-            _playerMovement.MovePlayerDestination(transform.position);
+            _playerMovement.MovePlayerToObjPos(gameObject);
             /*var coroutine = Wait();
             StartCoroutine(coroutine);*/
         }

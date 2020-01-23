@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool(IsRunning,_isRunning);
     }
 
-    public void MovePlayerDestination(Vector3 destination)
+    public void OLDMovePlayerDestination(Vector3 destination)
     {
         _navMeshAgent.SetDestination(destination);
         if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
@@ -68,6 +68,24 @@ public class PlayerMovement : MonoBehaviour
             _isRunning = true;
         }
         _animator.SetBool(IsRunning,_isRunning);
+    }
+
+    public void MovePlayerToObjPos(GameObject obj)
+    {
+        var target = obj.transform;
+        float a = transform.position.x - target.position.x;
+        float b = transform.position.z - target.position.z;
+        float AngleTowardUnit = Mathf.Atan(b/a);
+        float ObstacleRadius = 0.8f;
+        float xOffset = ObstacleRadius * Mathf.Cos(AngleTowardUnit);
+        float zOffset = ObstacleRadius * Mathf.Sin(AngleTowardUnit);
+        if (a < 0)
+        {
+            xOffset = -1 * xOffset;
+            zOffset = -1 * zOffset;
+        }
+        var x = new Vector3(target.position.x + xOffset, target.position.y, target.position.z + zOffset);
+        _navMeshAgent.SetDestination(x); 
     }
 
     public NavMeshAgent GetNavMeshAgent()
