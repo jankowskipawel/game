@@ -39,9 +39,9 @@ public class Tree : MonoBehaviour
 
         if (!isNearObject)
         {
-            _playerMovement.MovePlayerToObjPos(gameObject);
-            /*var coroutine = Wait();
-            StartCoroutine(coroutine);*/
+            var targetPos = _playerMovement.MovePlayerToObjPos(gameObject, 0.8f);
+            var coroutine = WaitAndCut(targetPos);
+            StartCoroutine(coroutine);
         }
         else
         {
@@ -50,15 +50,20 @@ public class Tree : MonoBehaviour
         
     }
     
-    /*IEnumerator Wait()
+    IEnumerator WaitAndCut(Vector3 targetpos)
     {
-        float x = (_playerMovement.PathLength()-1.3f) / _playerNavMeshAgent.speed + 0.5f;
+        float x = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed-1);
         yield return new WaitForSeconds(x);
         if (_playerMovement.IsPathCompleted())
         {
             CutTree();
         }
-    }*/
+    }
+    
+    IEnumerator Wait(float time)
+    {
+        yield return new WaitForSeconds(time);
+    }
 
     private void CutTree()
     {

@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool _isRunning = false;
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
-    private bool isBusy = false;
     public Text x;
 
     // Start is called before the first frame update
@@ -31,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
         MovePlayerRay(ray);
-        var xd = PathLength();
-        x.text = $"Path length: {xd}";
+        x.text = $"Path length: {CalculatePathLength(_navMeshAgent.destination)}, ETA: {(CalculatePathLength(_navMeshAgent.destination)) / (_navMeshAgent.speed)}, {IsPathCompleted()}";
     }
 
     public void MovePlayerRay(Ray ray)
@@ -70,13 +68,12 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool(IsRunning,_isRunning);
     }
 
-    public void MovePlayerToObjPos(GameObject obj)
+    public Vector3 MovePlayerToObjPos(GameObject obj, float ObstacleRadius)
     {
         var target = obj.transform;
         float a = transform.position.x - target.position.x;
         float b = transform.position.z - target.position.z;
         float AngleTowardUnit = Mathf.Atan(b/a);
-        float ObstacleRadius = 0.8f;
         float xOffset = ObstacleRadius * Mathf.Cos(AngleTowardUnit);
         float zOffset = ObstacleRadius * Mathf.Sin(AngleTowardUnit);
         if (a < 0)
@@ -85,7 +82,8 @@ public class PlayerMovement : MonoBehaviour
             zOffset = -1 * zOffset;
         }
         var x = new Vector3(target.position.x + xOffset, target.position.y, target.position.z + zOffset);
-        _navMeshAgent.SetDestination(x); 
+        _navMeshAgent.SetDestination(x);
+        return x;
     }
 
     public NavMeshAgent GetNavMeshAgent()
@@ -93,16 +91,6 @@ public class PlayerMovement : MonoBehaviour
         return _navMeshAgent;
     }
 
-    public bool GetIsBusy()
-    {
-        return isBusy;
-    }
-
-    public void SetIsBusy(bool x)
-    {
-        isBusy = x;
-    }
-    
     public bool IsPathCompleted()
     {
         if (!_navMeshAgent.pathPending)
@@ -119,21 +107,22 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
     
-    public float PathLength()
+    public float CalculatePathLength(Vector3 targetPosition)
     {
-        var path = _navMeshAgent.path;
-        if (path.corners.Length < 2)
-            return 0;
-        
-        Vector3 previousCorner = path.corners[0];
-        float lengthSoFar = 0.0F;
-        int i = 1;
-        while (i < path.corners.Length) {
-            Vector3 currentCorner = path.corners[i];
-            lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
-            previousCorner = currentCorner;
-            i++;
+        NavMeshPath path = _navMeshAgent.path;
+        Vector3[] allWayPoints = new Vector3[path.corners.Length + 2];
+        allWayPoints[0] = transform.position;
+        allWayPoints[allWayPoints.Length - 1] = targetPosition;
+    
+        for(int i = 0; i < path.corners.Length; i++)
+        {
+            allWayPoints[i + 1] = path.corners[i];
         }
-        return lengthSoFar;
+        float pathLength = 0;
+        for(int i = 0; i < allWayPoints.Length - 1; i++)
+        {
+            pathLength += Vector3.Distance(allWayPoints[i], allWayPoints[i + 1]);
+        }
+        return pathLength;
     }
 }

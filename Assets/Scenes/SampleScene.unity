@@ -98,7 +98,7 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.3
-    agentHeight: 2
+    agentHeight: 1.2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -274,7 +274,7 @@ NavMeshAgent:
   m_Acceleration: 500
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -744,7 +744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.2503422, y: -0, z: -0, w: 0.9681575}
-  m_LocalPosition: {x: 7.7, y: 10.83, z: -8.48}
+  m_LocalPosition: {x: 7.7, y: 18, z: -19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1945168559}
@@ -1375,8 +1375,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -281.9, y: 183.1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -12.7, y: 183.1}
+  m_SizeDelta: {x: 698.4, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1386998814
 GameObject:
