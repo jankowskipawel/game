@@ -11,6 +11,10 @@ public class Tree : MonoBehaviour
     private GameObject _player;
     private PlayerMovement _playerMovement;
     private NavMeshAgent _playerNavMeshAgent;
+    private Mesh originalMesh;
+    public Mesh depletedMesh;
+    private MeshFilter _meshFilter;
+    private RespawnResource _respawnResource;
     
     // Start is called before the first frame update
     void Start()
@@ -18,13 +22,16 @@ public class Tree : MonoBehaviour
         _player = GameObject.Find("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
+        originalMesh = gameObject.GetComponent<Mesh>();
+        _meshFilter = gameObject.GetComponent<MeshFilter>();
+        _respawnResource = transform.parent.GetComponent<RespawnResource>();
     }
 
     // Update is called once per frame
     void Update()
     {
     }
-    
+
     private void OnMouseDown()
     {
         Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 3f);
@@ -60,16 +67,12 @@ public class Tree : MonoBehaviour
         }
     }
     
-    IEnumerator Wait(float time)
-    {
-        yield return new WaitForSeconds(time);
-    }
+    
 
     private void CutTree()
     {
-        
-        Destroy(gameObject);
-        
+        gameObject.SetActive(false);
+        _respawnResource.StartRespawn();
     }
 
     
