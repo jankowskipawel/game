@@ -66,10 +66,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Camera.cs" />
+    <Compile Include="Assets\Scripts\C4mera.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Resource.cs" />
+    <Compile Include="Assets\Scripts\ResourcePopup.cs" />
     <Compile Include="Assets\Scripts\RespawnResource.cs" />
-    <Compile Include="Assets\Scripts\Tree.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/pawel/projects/gamedev/game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

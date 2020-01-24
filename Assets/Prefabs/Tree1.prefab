@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resource: {fileID: 1363196481873945268}
-  respawnTime: 1
+  respawnTime: 10
 --- !u!1001 &1363196481967417986
 PrefabInstance:
   m_ObjectHideFlags: 0
