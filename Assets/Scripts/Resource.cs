@@ -11,26 +11,22 @@ public class Resource : MonoBehaviour
     private GameObject _player;
     private PlayerMovement _playerMovement;
     private NavMeshAgent _playerNavMeshAgent;
-    private Mesh originalMesh;
-    public Mesh depletedMesh;
-    private MeshFilter _meshFilter;
-    private RespawnResource _respawnResource;
+    public GameObject resource;
+    public GameObject depletedResource;
+    public float respawnTime = 1f;
     
     void Start()
     {
         _player = GameObject.Find("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
-        originalMesh = gameObject.GetComponent<Mesh>();
-        _meshFilter = gameObject.GetComponent<MeshFilter>();
-        _respawnResource = transform.parent.GetComponent<RespawnResource>();
     }
 
     void Update()
     {
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 3f);
         bool isNearObject = false;
@@ -45,35 +41,46 @@ public class Resource : MonoBehaviour
         if (!isNearObject)
         {
             var targetPos = _playerMovement.MovePlayerToObjPos(gameObject, 0.8f);
-            var coroutine = WaitAndCut(targetPos);
+            var coroutine = WaitAndGather(targetPos);
             StartCoroutine(coroutine);
         }
         else
         {
             Gather();
         }
-        
     }
     
-    IEnumerator WaitAndCut(Vector3 targetpos)
+    IEnumerator WaitAndGather(Vector3 targetpos)
     {
         float timeToReach = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed-1);
         yield return new WaitForSeconds(timeToReach);
         if (_playerMovement.IsPathCompleted())
         {
             Gather();
-        }
+        } 
     }
     
-    
-
     private void Gather()
     {
-        gameObject.SetActive(false);
+        resource.SetActive(false);
+        depletedResource.SetActive(true);
         _playerNavMeshAgent.ResetPath();
-        _respawnResource.StartRespawn();
+        StartRespawn();
     }
 
+    IEnumerator WaitForRespawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        resource.SetActive(true);
+        depletedResource.SetActive(false);
+    }
     
+    //
+    public void StartRespawn()
+    {
+        var coroutine = WaitForRespawn();
+        StartCoroutine(coroutine);
+
+    }
     
 }
