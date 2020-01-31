@@ -695,6 +695,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4140065963842344046, guid: 2065920b721a3bd4da6cf932ab1e70d0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140065965139069979, guid: 2065920b721a3bd4da6cf932ab1e70d0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2065920b721a3bd4da6cf932ab1e70d0, type: 3}
 --- !u!1001 &902780486
