@@ -32,7 +32,7 @@ public class Resource : MonoBehaviour
         bool isNearObject = false;
         foreach (var collider in hitColliders)
         {
-            if (collider == gameObject.GetComponent<Collider>())
+            if (collider == resource.GetComponent<Collider>())
             {
                 isNearObject = true;
             }
@@ -52,12 +52,22 @@ public class Resource : MonoBehaviour
     
     IEnumerator WaitAndGather(Vector3 targetpos)
     {
-        float timeToReach = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed-1);
+        float timeToReach = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed);
         yield return new WaitForSeconds(timeToReach);
-        if (_playerMovement.IsPathCompleted())
+        Collider[] hitColliders = Physics.OverlapSphere(_player.transform.position, 3f);
+        bool isNearObject = false;
+        foreach (var collider in hitColliders)
+        {
+            if (collider == resource.GetComponent<Collider>())
+            {
+                isNearObject = true;
+            }
+        }
+
+        if (_playerMovement.IsPathCompleted() & isNearObject)
         {
             Gather();
-        } 
+        }
     }
     
     private void Gather()

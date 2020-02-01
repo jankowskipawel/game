@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 MovePlayerToObjPos(GameObject obj, float ObstacleRadius)
     {
+        _navMeshAgent.ResetPath();
         var target = obj.transform;
         float a = transform.position.x - target.position.x;
         float b = transform.position.z - target.position.z;
