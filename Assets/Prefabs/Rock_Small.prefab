@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 888081394191713555}
   - component: {fileID: 1174405110}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Rock_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,6 +90,7 @@ MonoBehaviour:
   resource: {fileID: 1177702796598522256}
   depletedResource: {fileID: 874710511968870967}
   respawnTime: 1
+  resourceType: 2
 --- !u!1001 &874710511968969879
 PrefabInstance:
   m_ObjectHideFlags: 0

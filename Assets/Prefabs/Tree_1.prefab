@@ -171,6 +171,7 @@ MonoBehaviour:
   resource: {fileID: 7210193770887833858}
   depletedResource: {fileID: 7507952121748034525}
   respawnTime: 1
+  resourceType: 0
 --- !u!1 &7507952121748034525
 GameObject:
   m_ObjectHideFlags: 0

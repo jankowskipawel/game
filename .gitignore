@@ -2,3 +2,4 @@
 # Default ignored files
 /.idea.game/.idea/workspace.xml
 .Temp
+builds/

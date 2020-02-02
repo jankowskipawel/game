@@ -6,6 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+public enum ResourceType
+{
+    woodBrown,
+    woodGrey,
+    stone,
+    copper,
+        
+}
 public class Resource : MonoBehaviour
 {
     private GameObject _player;
@@ -14,7 +22,8 @@ public class Resource : MonoBehaviour
     public GameObject resource;
     public GameObject depletedResource;
     public float respawnTime = 1f;
-    
+    public ResourceType resourceType;
+
     void Start()
     {
         _player = GameObject.Find("Player");
