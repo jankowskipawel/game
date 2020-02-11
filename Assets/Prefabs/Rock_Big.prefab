@@ -48,7 +48,7 @@ MonoBehaviour:
   resource: {fileID: 4140065965139069979}
   depletedResource: {fileID: 4140065963842344046}
   respawnTime: 1
-  resourceType: 2
+  resourceID: 16
 --- !u!64 &804806387
 MeshCollider:
   m_ObjectHideFlags: 0

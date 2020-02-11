@@ -11,17 +11,23 @@ public class Resource : MonoBehaviour
 {
     private GameObject _player;
     private PlayerMovement _playerMovement;
+    private PlayerResources _playerResources;
     private NavMeshAgent _playerNavMeshAgent;
     public GameObject resource;
     public GameObject depletedResource;
     public float respawnTime = 1f;
     public int resourceID;
-    
+    private int resourceQuantity;
+    private int maxQuantity = 5;
+    private int toolEfficiency = 1;
+
     void Start()
     {
         _player = GameObject.Find("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
+        _playerResources = _player.GetComponent<PlayerResources>();
+        resourceQuantity = maxQuantity;
     }
 
     void Update()
@@ -77,10 +83,15 @@ public class Resource : MonoBehaviour
     
     private void Gather()
     {
-        resource.SetActive(false);
-        depletedResource.SetActive(true);
-        _playerNavMeshAgent.ResetPath();
-        StartRespawn();
+        _playerResources.AddResource(resourceID, toolEfficiency);
+        resourceQuantity -= toolEfficiency;
+        if (resourceQuantity <= 0)
+        {
+            resource.SetActive(false);
+            depletedResource.SetActive(true);
+            _playerNavMeshAgent.ResetPath();
+            StartRespawn();
+        }
     }
 
     IEnumerator WaitForRespawn()
@@ -88,14 +99,13 @@ public class Resource : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         resource.SetActive(true);
         depletedResource.SetActive(false);
+        resourceQuantity = maxQuantity; 
     }
     
-    //
     public void StartRespawn()
     {
         var coroutine = WaitForRespawn();
         StartCoroutine(coroutine);
-
     }
-    
+
 }

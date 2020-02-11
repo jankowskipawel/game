@@ -90,7 +90,7 @@ MonoBehaviour:
   resource: {fileID: 1177702796598522256}
   depletedResource: {fileID: 874710511968870967}
   respawnTime: 1
-  resourceType: 2
+  resourceID: 16
 --- !u!1001 &874710511968969879
 PrefabInstance:
   m_ObjectHideFlags: 0
