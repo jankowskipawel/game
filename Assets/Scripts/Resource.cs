@@ -15,6 +15,7 @@ public class Resource : MonoBehaviour
     private NavMeshAgent _playerNavMeshAgent;
     public GameObject resource;
     public GameObject depletedResource;
+    private Animator _animator;
     public float respawnTime = 1f;
     public int resourceID;
     private int resourceQuantity;
@@ -28,6 +29,7 @@ public class Resource : MonoBehaviour
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
         _playerResources = _player.GetComponent<PlayerResources>();
         resourceQuantity = maxQuantity;
+        _animator = _player.GetComponent<Animator>();
     }
 
     void Update()
@@ -83,6 +85,7 @@ public class Resource : MonoBehaviour
     
     private void Gather()
     {
+        _animator.SetTrigger("chop");
         _playerResources.AddResource(resourceID, toolEfficiency);
         resourceQuantity -= toolEfficiency;
         if (resourceQuantity <= 0)

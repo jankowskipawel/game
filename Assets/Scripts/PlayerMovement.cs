@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, 100))
             {
+                _animator.SetTrigger("stopActionAnimation");
                 _navMeshAgent.destination = hit.point;
             }
         }
