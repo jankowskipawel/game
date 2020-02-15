@@ -259,8 +259,8 @@ ModelImporter:
     - serializedVersion: 16
       name: idle
       takeName: Armature|Armature|Armature|Idle|Armature|Idle
-      firstFrame: 0
-      lastFrame: 119
+      firstFrame: 71
+      lastFrame: 74
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -455,15 +455,15 @@ ModelImporter:
     - serializedVersion: 16
       name: chop
       takeName: Armature|chop
-      firstFrame: 0
-      lastFrame: 160
+      firstFrame: 42
+      lastFrame: 159
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -479,7 +479,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 25
     isReadable: 1
   meshes:
     lODScreenPercentages: []

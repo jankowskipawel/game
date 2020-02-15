@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
             zOffset = -1 * zOffset;
         }
         var x = new Vector3(target.position.x + xOffset, target.position.y, target.position.z + zOffset);
+        _animator.SetTrigger("stopActionAnimation");
         _navMeshAgent.SetDestination(x);
         return x;
     }
