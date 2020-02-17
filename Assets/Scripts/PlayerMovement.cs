@@ -40,24 +40,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, 100))
             {
-                _animator.SetTrigger("stopActionAnimation");
                 _navMeshAgent.destination = hit.point;
             }
         }
-        if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
-        {
-            _isRunning = false;
-        }
-        else
-        {
-            _isRunning = true;
-        }
-        _animator.SetBool(IsRunning,_isRunning);
-    }
-
-    public void OLDMovePlayerDestination(Vector3 destination)
-    {
-        _navMeshAgent.SetDestination(destination);
         if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
         {
             _isRunning = false;
@@ -84,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             zOffset = -1 * zOffset;
         }
         var x = new Vector3(target.position.x + xOffset, target.position.y, target.position.z + zOffset);
-        _animator.SetTrigger("stopActionAnimation");
+        //_animator.SetTrigger("stopActionAnimation");
         _navMeshAgent.SetDestination(x);
         return x;
     }
