@@ -93,7 +93,7 @@ public class Resource : MonoBehaviour
         resourceQuantity -= toolEfficiency;
         if (resourceQuantity <= 0)
         {
-            audioManager.Play(GenerateSoundName(true, 3));
+            audioManager.Play(GenerateSoundName(true, 1));
             resource.SetActive(false);
             depletedResource.SetActive(true);
             _playerNavMeshAgent.ResetPath();

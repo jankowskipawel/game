@@ -1209,6 +1209,18 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 8c22ee5a086362e4a81fa642ee83e45d, type: 3}
   - name: StoneHit3
     audioClip: {fileID: 8300000, guid: da2a86ea86fbcad40b04951911820d26, type: 3}
+  - name: StoneBreak1
+    audioClip: {fileID: 8300000, guid: b64e0761bd822834eb0b3b025cdbe4dd, type: 3}
+  - name: WoodBreak1
+    audioClip: {fileID: 8300000, guid: cb72100bc1d9d21499a0eb8a716725ac, type: 3}
+  - name: WoodBreak2
+    audioClip: {fileID: 8300000, guid: c45ffa21c8265af4d82237bb904ca157, type: 3}
+  - name: WoodHit1
+    audioClip: {fileID: 8300000, guid: 6510cd9879dabf04aae274325dc2ef6a, type: 3}
+  - name: WoodHit2
+    audioClip: {fileID: 8300000, guid: da2679dbb976bc34fad6051b5ea2cce8, type: 3}
+  - name: WoodHit3
+    audioClip: {fileID: 8300000, guid: da2679dbb976bc34fad6051b5ea2cce8, type: 3}
 --- !u!4 &823251247
 Transform:
   m_ObjectHideFlags: 0
