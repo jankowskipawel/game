@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AManagerC2.cs" />
     <Compile Include="Assets\Scripts\C4mera.cs" />
     <Compile Include="Assets\Scripts\CustomAudioManager.cs" />
     <Compile Include="Assets\Scripts\InventoryUI.cs" />

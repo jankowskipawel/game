@@ -23,7 +23,7 @@ public class Resource : MonoBehaviour
     private int resourceQuantity;
     private int maxQuantity = 5;
     private int toolEfficiency = 1;
-    private AManagerC2 audioManager;
+    private CustomAudioManager audioManager;
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class Resource : MonoBehaviour
         _playerResources = _player.GetComponent<PlayerResources>();
         resourceQuantity = maxQuantity;
         _animator = _player.GetComponent<Animator>();
-        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AManagerC2>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<CustomAudioManager>();
     }
 
     void Update()

@@ -8,7 +8,6 @@
       <e p="Assets" t="Include">
         <e p="credits.txt" t="Include" />
         <e p="Scripts" t="Include">
-          <e p="AManagerC2.cs" t="Include" />
           <e p="C4mera.cs" t="Include" />
           <e p="CustomAudioManager.cs" t="Include" />
           <e p="InventoryUI.cs" t="Include" />

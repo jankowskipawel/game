@@ -1,51 +1,50 @@
-﻿using UnityEngine.Audio;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
+[RequireComponent (typeof(AudioSource))]
 public class CustomAudioManager : MonoBehaviour
 {
+    public SoundEffect[] soundEffects;
+    private Dictionary<string, SoundEffect> soundLibrary;
+    private AudioSource audioSource;
 
-    public static CustomAudioManager instance;
-
-    public AudioMixerGroup mixerGroup;
-
-    public Sound[] sounds;
-
-    void Awake()
+    [System.Serializable]
+    public struct SoundEffect
     {
-        if (instance != null)
+        public string name;
+        public AudioClip audioClip;
+        [Range(0f, 1f)]
+        public float volume;
+    }
+
+    void Start()
+    {
+        soundLibrary = new Dictionary<string, SoundEffect>();
+        audioSource = GetComponent<AudioSource>();
+
+        for (int i = 0; i < soundEffects.Length; i++)
         {
-            Destroy(gameObject);
+            if (soundLibrary.ContainsKey(soundEffects[i].name))
+            {
+                Debug.LogWarning(string.Format("AudioManager::Start: {0} already has a sound effect named: {1} please rename", gameObject.name, soundEffects[i].name));
+            }
+            else
+            {
+                soundLibrary.Add(soundEffects[i].name, soundEffects[i]);
+            }
+        }
+    }
+
+    public void Play(string name)
+    {
+        if (soundLibrary.ContainsKey(name))
+        {
+            audioSource.PlayOneShot(soundLibrary[name].audioClip, soundLibrary[name].volume);
         }
         else
         {
-            instance = this;
-            //DontDestroyOnLoad(gameObject);
-        }
-
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.loop = s.loop;
-
-            s.source.outputAudioMixerGroup = mixerGroup;
+            Debug.LogWarning(string.Format("AudioManager::PlaySound: {0} does not have a sound effect named: {1} skipping", gameObject.name, name));
         }
     }
-
-    public void Play(string sound)
-    {
-        Sound s = Array.Find(sounds, item => item.name == sound);
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + sound + " not found!");
-            return;
-        }
-
-        s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
-        s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
-
-        s.source.Play();
-    }
-
 }
