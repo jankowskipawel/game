@@ -24,7 +24,9 @@ public class Resource : MonoBehaviour
     private int maxQuantity = 5;
     private int toolEfficiency = 1;
     private CustomAudioManager audioManager;
-
+    public GameObject resourcePopup;
+    public Texture icon;
+    
     void Start()
     {
         _player = GameObject.Find("Player");
@@ -55,8 +57,8 @@ public class Resource : MonoBehaviour
         if (!isNearObject)
         {
             var targetPos = _playerMovement.MovePlayerToObjPos(gameObject, 0.8f);
-            var coroutine = WaitAndGather(targetPos);
-            StartCoroutine(coroutine);
+            //var coroutine = WaitAndGather(targetPos);
+            //StartCoroutine(coroutine);
         }
         else
         {
@@ -66,7 +68,7 @@ public class Resource : MonoBehaviour
         }
     }
     
-    IEnumerator WaitAndGather(Vector3 targetpos)
+    /*IEnumerator WaitAndGather(Vector3 targetpos)
     {
         float timeToReach = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed);
         yield return new WaitForSeconds(timeToReach);
@@ -84,13 +86,16 @@ public class Resource : MonoBehaviour
         {
             Gather();
         }
-    }
+    }*/
     
     private void Gather()
     {
         _animator.SetTrigger("chop");
         _playerResources.AddResource(resourceID, toolEfficiency);
         resourceQuantity -= toolEfficiency;
+        var popup = Instantiate(resourcePopup, transform.position, Quaternion.identity);
+        popup.GetComponent<ResourcePopup>().SetText(toolEfficiency);
+        popup.GetComponent<ResourcePopup>().SetIcon(icon);
         if (resourceQuantity <= 0)
         {
             audioManager.Play(GenerateSoundName(true, 1));

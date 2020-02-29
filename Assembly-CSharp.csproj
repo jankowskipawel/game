@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\PlayerResources.cs" />
     <Compile Include="Assets\Scripts\Resource.cs" />
     <Compile Include="Assets\Scripts\ResourceClick.cs" />
+    <Compile Include="Assets\Scripts\ResourcePopup.cs" />
     <Compile Include="Assets\Scripts\ResourceTextUI.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
