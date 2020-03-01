@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -26,7 +27,6 @@ public class Resource : MonoBehaviour
     private CustomAudioManager audioManager;
     public GameObject resourcePopup;
     public Texture icon;
-    
     void Start()
     {
         _player = GameObject.Find("Player");
@@ -68,6 +68,8 @@ public class Resource : MonoBehaviour
         }
     }
     
+    
+
     //go and activate
     /*IEnumerator WaitAndGather(Vector3 targetpos)
     {
