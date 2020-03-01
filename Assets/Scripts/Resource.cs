@@ -21,7 +21,7 @@ public class Resource : MonoBehaviour
     public float respawnTime = 1f;
     public int resourceID;
     private int resourceQuantity;
-    private int maxQuantity = 5;
+    public int maxQuantity = 5;
     private int toolEfficiency = 1;
     private CustomAudioManager audioManager;
     public GameObject resourcePopup;
@@ -33,7 +33,7 @@ public class Resource : MonoBehaviour
         _playerMovement = _player.GetComponent<PlayerMovement>();
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
         _playerResources = _player.GetComponent<PlayerResources>();
-        resourceQuantity = maxQuantity;
+        resourceQuantity = maxQuantity + Convert.ToInt32(UnityEngine.Random.Range(-maxQuantity*0.3f, maxQuantity*0.3f));
         _animator = _player.GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<CustomAudioManager>();
     }
@@ -68,6 +68,7 @@ public class Resource : MonoBehaviour
         }
     }
     
+    //go and activate
     /*IEnumerator WaitAndGather(Vector3 targetpos)
     {
         float timeToReach = (_playerMovement.CalculatePathLength(targetpos)) / (_playerNavMeshAgent.speed);
@@ -115,7 +116,7 @@ public class Resource : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         resource.SetActive(true);
         depletedResource.SetActive(false);
-        resourceQuantity = maxQuantity; 
+        resourceQuantity = maxQuantity + Convert.ToInt32(UnityEngine.Random.Range(-maxQuantity*0.3f, maxQuantity*0.3f)); 
     }
     
     public void StartRespawn()
