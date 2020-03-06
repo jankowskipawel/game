@@ -62,6 +62,7 @@ public class Resource : MonoBehaviour
         }
         else
         {
+            _playerNavMeshAgent.ResetPath();
             var q = Quaternion.LookRotation(transform.position - _player.transform.position);
             _player.transform.rotation = Quaternion.RotateTowards(_player.transform.rotation, q, 200);
             Gather();

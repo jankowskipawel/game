@@ -11,6 +11,7 @@
           <e p="C4mera.cs" t="Include" />
           <e p="CustomAudioManager.cs" t="Include" />
           <e p="InventoryUI.cs" t="Include" />
+          <e p="PlayerExperience.cs" t="Include" />
           <e p="PlayerMovement.cs" t="Include" />
           <e p="PlayerResources.cs" t="Include" />
           <e p="Resource.cs" t="Include" />

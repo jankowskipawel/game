@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\C4mera.cs" />
     <Compile Include="Assets\Scripts\CustomAudioManager.cs" />
     <Compile Include="Assets\Scripts\InventoryUI.cs" />
+    <Compile Include="Assets\Scripts\PlayerExperience.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerResources.cs" />
     <Compile Include="Assets\Scripts\Resource.cs" />
