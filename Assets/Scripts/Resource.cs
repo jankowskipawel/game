@@ -27,12 +27,16 @@ public class Resource : MonoBehaviour
     private CustomAudioManager audioManager;
     public GameObject resourcePopup;
     public Texture icon;
+    public int ExpID;
+    private PlayerExperience _playerExperience;
+    
     void Start()
     {
         _player = GameObject.Find("Player");
         _playerMovement = _player.GetComponent<PlayerMovement>();
         _playerNavMeshAgent = _player.GetComponent<NavMeshAgent>();
         _playerResources = _player.GetComponent<PlayerResources>();
+        _playerExperience = _player.GetComponent<PlayerExperience>();
         resourceQuantity = maxQuantity + Convert.ToInt32(UnityEngine.Random.Range(-maxQuantity*0.3f, maxQuantity*0.3f));
         _animator = _player.GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<CustomAudioManager>();
@@ -97,6 +101,7 @@ public class Resource : MonoBehaviour
         _animator.SetTrigger("chop");
         _playerResources.AddResource(resourceID, toolEfficiency);
         resourceQuantity -= toolEfficiency;
+        _playerExperience.AddExp(ExpID, Convert.ToUInt64(toolEfficiency));
         var popup = Instantiate(resourcePopup, transform.position, Quaternion.identity);
         popup.GetComponent<ResourcePopup>().SetText(toolEfficiency);
         popup.GetComponent<ResourcePopup>().SetIcon(icon);

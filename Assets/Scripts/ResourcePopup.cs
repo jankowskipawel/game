@@ -31,7 +31,7 @@ public class ResourcePopup : MonoBehaviour
             timer += Time.deltaTime;
             t += Time.deltaTime/0.2f;
             transform.position = Vector3.Lerp(startingPos, endPos, t);
-            if (/*transform.position == endPos &&*/ timer > 0.3f)
+            if (timer > 0.3f)
             {
                 Destroy(gameObject);
             }

@@ -91,9 +91,11 @@ MonoBehaviour:
   depletedResource: {fileID: 874710511968870967}
   respawnTime: 1
   resourceID: 16
+  maxQuantity: 5
   resourcePopup: {fileID: 1424413357198013949, guid: a850efeefb2b03f40a61252e24a0c801,
     type: 3}
   icon: {fileID: 2800000, guid: 77bb41694a8d39e4798514a47660ee6a, type: 3}
+  ExpID: 1
 --- !u!1001 &874710511968969879
 PrefabInstance:
   m_ObjectHideFlags: 0

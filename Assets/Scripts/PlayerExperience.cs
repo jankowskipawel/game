@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
+    private ulong[] experience = new ulong[8];
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class PlayerExperience : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddExp(int expID, ulong amount)
+    {
+        experience[expID] += amount;
     }
 }
